@@ -1,0 +1,206 @@
+package org.example.project
+
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.Button
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
+
+import loyalty.composeapp.generated.resources.Res
+import loyalty.composeapp.generated.resources.compose_multiplatform
+
+@Composable
+@Preview
+fun App() {
+    var text by remember { mutableStateOf("") }
+    var isError by remember { mutableStateOf(false) }
+    MaterialTheme {
+        var showContent by remember { mutableStateOf(false) }
+        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+            Button(onClick = { showContent = !showContent }) {
+                Text("Click me!")
+            }
+            AnimatedVisibility(showContent) {
+                val greeting = remember { Greeting().greet() }
+                Column(
+                    Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Image(painterResource(Res.drawable.compose_multiplatform), null)
+                    Text("Compose: $greeting")
+                }
+            }
+            var username by remember { mutableStateOf("hello") }
+            BasicTextField(
+                value = username,
+                onValueChange = { username = it },
+            )
+            CustomTextField(
+                value = text,
+                onValueChange = {
+                    text = it
+                    isError = it.isEmpty()
+                },
+                placeholder = "Enter a number",
+                isError = isError,
+                errorText = "This field cannot be empty",
+                keyboardType = KeyboardType.Number,
+                imeAction = ImeAction.Done,
+                onImeAction = {
+                    // Perform an action when the "Done" button is pressed
+                    println("Input completed: $text")
+                }
+            )
+        }
+    }
+}
+
+@Composable
+fun CustomTextField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
+    placeholder: String = "",
+    isError: Boolean = false,
+    errorText: String = "",
+    textAlign: TextAlign = TextAlign.Start,
+    keyboardType: KeyboardType = KeyboardType.Text,
+    imeAction: ImeAction = ImeAction.Default,
+    onImeAction: () -> Unit = {}
+) {
+    val keyboardController = LocalSoftwareKeyboardController.current
+
+    Column(modifier = modifier) {
+        BasicTextField(
+            value = value,
+            onValueChange = onValueChange,
+            modifier = Modifier
+                .fillMaxWidth()
+
+                .background(Color.Gray)
+                .border(
+                    width = 1.dp,
+                    color = if (isError) Color.Red else Color.Gray,
+                    shape = RoundedCornerShape(8.dp)
+                )
+                .padding(16.dp),
+            textStyle = TextStyle(
+                fontSize = 16.sp,
+                textAlign = textAlign,
+               // color = MaterialTheme.colorScheme.onSurface
+            ),
+            keyboardOptions = KeyboardOptions(
+                keyboardType = keyboardType,
+                imeAction = imeAction
+            ),
+
+            keyboardActions = KeyboardActions(
+               onDone =  {
+                   keyboardController?.hide()
+                   onImeAction()
+               }
+            ),
+            decorationBox = { innerTextField ->
+                if (value.isEmpty()) {
+                    Text(
+                        text = placeholder,
+                        style = TextStyle(
+                            fontSize = 16.sp,
+                            color = Color.Gray
+                        )
+                    )
+                }
+                innerTextField()
+            }
+        )
+        if (isError) {
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                text = errorText,
+                color = Color.Red,
+                fontSize = 12.sp,
+             //   style = MaterialTheme.typography.bodySmall
+            )
+        }
+    }
+}
+
+
+//@Composable
+//fun CustomTextField(
+//    value: String,
+//    onValueChange: (String) -> Unit,
+//    modifier: Modifier = Modifier,
+//    placeholder: String = "",
+//    isError: Boolean = false,
+//    errorText: String = "",
+//    textAlign: TextAlign = TextAlign.Start
+//) {
+//    Column(modifier = modifier) {
+//        BasicTextField(
+//            value = value,
+//            onValueChange = onValueChange,
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .border(
+//                    width = 1.dp,
+//                    color = if (isError) Color.Red else Color.Gray,
+//                    shape = RoundedCornerShape(8.dp)
+//                )
+//                .padding(16.dp),
+//            textStyle = TextStyle(
+//                fontSize = 16.sp,
+//                textAlign = textAlign,
+//                //   color = MaterialTheme.colorScheme.onSurface
+//            ),
+//
+//            decorationBox = { innerTextField ->
+//                if (value.isEmpty()) {
+//                    Text(
+//                        text = placeholder,
+//
+//                        style = TextStyle(
+//                            fontSize = 16.sp,
+//                            color = Color.Gray
+//                        )
+//                    )
+//                }
+//                innerTextField()
+//            }
+//        )
+//        if (isError) {
+//            Spacer(modifier = Modifier.height(4.dp))
+//            Text(
+//                text = errorText,
+//                color = Color.Red,
+//                fontSize = 12.sp,
+//                //   style = MaterialTheme.typography.bodySmall
+//            )
+//        }
+//    }
+//}
+
