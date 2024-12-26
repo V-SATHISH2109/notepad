@@ -1,0 +1,250 @@
+val countries = listOf(
+    Country(name = "Afghanistan", isoCode = "AF", stdCode = "+93"),
+    Country(name = "Albania", isoCode = "AL", stdCode = "+355"),
+    Country(name = "Algeria", isoCode = "DZ", stdCode = "+213"),
+    Country(name = "Andorra", isoCode = "AD", stdCode = "+376"),
+    Country(name = "Angola", isoCode = "AO", stdCode = "+244"),
+    Country(name = "Argentina", isoCode = "AR", stdCode = "+54"),
+    Country(name = "Armenia", isoCode = "AM", stdCode = "+374"),
+    Country(name = "Australia", isoCode = "AU", stdCode = "+61"),
+    Country(name = "Austria", isoCode = "AT", stdCode = "+43"),
+    Country(name = "Azerbaijan", isoCode = "AZ", stdCode = "+994"),
+    Country(name = "Bahamas", isoCode = "BS", stdCode = "+1-242"),
+    Country(name = "Bahrain", isoCode = "BH", stdCode = "+973"),
+    Country(name = "Bangladesh", isoCode = "BD", stdCode = "+880"),
+    Country(name = "Belarus", isoCode = "BY", stdCode = "+375"),
+    Country(name = "Belgium", isoCode = "BE", stdCode = "+32"),
+    Country(name = "Belize", isoCode = "BZ", stdCode = "+501"),
+    Country(name = "Benin", isoCode = "BJ", stdCode = "+229"),
+    Country(name = "Bhutan", isoCode = "BT", stdCode = "+975"),
+    Country(name = "Bolivia", isoCode = "BO", stdCode = "+591"),
+    Country(name = "Bosnia and Herzegovina", isoCode = "BA", stdCode = "+387"),
+    Country(name = "Botswana", isoCode = "BW", stdCode = "+267"),
+    Country(name = "Brazil", isoCode = "BR", stdCode = "+55"),
+    Country(name = "Brunei", isoCode = "BN", stdCode = "+673"),
+    Country(name = "Bulgaria", isoCode = "BG", stdCode = "+359"),
+    Country(name = "Burkina Faso", isoCode = "BF", stdCode = "+226"),
+    Country(name = "Burundi", isoCode = "BI", stdCode = "+257"),
+    Country(name = "Cambodia", isoCode = "KH", stdCode = "+855"),
+    Country(name = "Cameroon", isoCode = "CM", stdCode = "+237"),
+    Country(name = "Canada", isoCode = "CA", stdCode = "+1"),
+    Country(name = "Cape Verde", isoCode = "CV", stdCode = "+238"),
+    Country(name = "Central African Republic", isoCode = "CF", stdCode = "+236"),
+    Country(name = "Chad", isoCode = "TD", stdCode = "+235"),
+    Country(name = "Chile", isoCode = "CL", stdCode = "+56"),
+    Country(name = "China", isoCode = "CN", stdCode = "+86"),
+    Country(name = "Colombia", isoCode = "CO", stdCode = "+57"),
+    Country(name = "Comoros", isoCode = "KM", stdCode = "+269"),
+    Country(name = "Congo", isoCode = "CG", stdCode = "+242"),
+    Country(name = "Congo, Democratic Republic of", isoCode = "CD", stdCode = "+243"),
+    Country(name = "Costa Rica", isoCode = "CR", stdCode = "+506"),
+    Country(name = "Croatia", isoCode = "HR", stdCode = "+385"),
+    Country(name = "Cuba", isoCode = "CU", stdCode = "+53"),
+    Country(name = "Cyprus", isoCode = "CY", stdCode = "+357"),
+    Country(name = "Czech Republic", isoCode = "CZ", stdCode = "+420"),
+    Country(name = "Denmark", isoCode = "DK", stdCode = "+45"),
+    Country(name = "Djibouti", isoCode = "DJ", stdCode = "+253"),
+    Country(name = "Dominica", isoCode = "DM", stdCode = "+1-767"),
+    Country(name = "Dominican Republic", isoCode = "DO", stdCode = "+1-809"),
+    Country(name = "Ecuador", isoCode = "EC", stdCode = "+593"),
+    Country(name = "Egypt", isoCode = "EG", stdCode = "+20"),
+    Country(name = "El Salvador", isoCode = "SV", stdCode = "+503"),
+    Country(name = "Equatorial Guinea", isoCode = "GQ", stdCode = "+240"),
+    Country(name = "Eritrea", isoCode = "ER", stdCode = "+291"),
+    Country(name = "Estonia", isoCode = "EE", stdCode = "+372"),
+    Country(name = "Eswatini", isoCode = "SZ", stdCode = "+268"),
+    Country(name = "Ethiopia", isoCode = "ET", stdCode = "+251"),
+    Country(name = "Fiji", isoCode = "FJ", stdCode = "+679"),
+    Country(name = "Finland", isoCode = "FI", stdCode = "+358"),
+    Country(name = "France", isoCode = "FR", stdCode = "+33"),
+    Country(name = "Gabon", isoCode = "GA", stdCode = "+241"),
+    Country(name = "Gambia", isoCode = "GM", stdCode = "+220"),
+    Country(name = "Georgia", isoCode = "GE", stdCode = "+995"),
+    Country(name = "Germany", isoCode = "DE", stdCode = "+49"),
+    Country(name = "Ghana", isoCode = "GH", stdCode = "+233"),
+    Country(name = "Greece", isoCode = "GR", stdCode = "+30"),
+    Country(name = "Grenada", isoCode = "GD", stdCode = "+1-473"),
+    Country(name = "Guatemala", isoCode = "GT", stdCode = "+502"),
+    Country(name = "Guinea", isoCode = "GN", stdCode = "+224"),
+    Country(name = "Guinea-Bissau", isoCode = "GW", stdCode = "+245"),
+    Country(name = "Guyana", isoCode = "GY", stdCode = "+592"),
+    Country(name = "Haiti", isoCode = "HT", stdCode = "+509"),
+    Country(name = "Honduras", isoCode = "HN", stdCode = "+504"),
+    Country(name = "Hungary", isoCode = "HU", stdCode = "+36"),
+    Country(name = "Iceland", isoCode = "IS", stdCode = "+354"),
+    Country(name = "India", isoCode = "IN", stdCode = "+91"),
+    Country(name = "Indonesia", isoCode = "ID", stdCode = "+62"),
+    Country(name = "Iran", isoCode = "IR", stdCode = "+98"),
+    Country(name = "Iraq", isoCode = "IQ", stdCode = "+964"),
+    Country(name = "Ireland", isoCode = "IE", stdCode = "+353"),
+    Country(name = "Israel", isoCode = "IL", stdCode = "+972"),
+    Country(name = "Italy", isoCode = "IT", stdCode = "+39"),
+    Country(name = "Jamaica", isoCode = "JM", stdCode = "+1-876"),
+    Country(name = "Japan", isoCode = "JP", stdCode = "+81"),
+    Country(name = "Jordan", isoCode = "JO", stdCode = "+962"),
+    Country(name = "Kazakhstan", isoCode = "KZ", stdCode = "+7"),
+    Country(name = "Kenya", isoCode = "KE", stdCode = "+254"),
+    Country(name = "Kiribati", isoCode = "KI", stdCode = "+686"),
+    Country(name = "Kuwait", isoCode = "KW", stdCode = "+965"),
+    Country(name = "Kyrgyzstan", isoCode = "KG", stdCode = "+996"),
+    Country(name = "Laos", isoCode = "LA", stdCode = "+856"),
+    Country(name = "Latvia", isoCode = "LV", stdCode = "+371"),
+    Country(name = "Lebanon", isoCode = "LB", stdCode = "+961"),
+    Country(name = "Lesotho", isoCode = "LS", stdCode = "+266"),
+    Country(name = "Liberia", isoCode = "LR", stdCode = "+231"),
+    Country(name = "Libya", isoCode = "LY", stdCode = "+218"),
+    Country(name = "Liechtenstein", isoCode = "LI", stdCode = "+423"),
+    Country(name = "Lithuania", isoCode = "LT", stdCode = "+370"),
+    Country(name = "Luxembourg", isoCode = "LU", stdCode = "+352"),
+    Country(name = "Madagascar", isoCode = "MG", stdCode = "+261"),
+    Country(name = "Malawi", isoCode = "MW", stdCode = "+265"),
+    Country(name = "Malaysia", isoCode = "MY", stdCode = "+60"),
+    Country(name = "Maldives", isoCode = "MV", stdCode = "+960"),
+    Country(name = "Mali", isoCode = "ML", stdCode = "+223"),
+    Country(name = "Malta", isoCode = "MT", stdCode = "+356"),
+    Country(name = "Marshall Islands", isoCode = "MH", stdCode = "+692"),
+    Country(name = "Mauritania", isoCode = "MR", stdCode = "+222"),
+    Country(name = "Mauritius", isoCode = "MU", stdCode = "+230"),
+    Country(name = "Mexico", isoCode = "MX", stdCode = "+52"),
+    Country(name = "Micronesia", isoCode = "FM", stdCode = "+691"),
+    Country(name = "Moldova", isoCode = "MD", stdCode = "+373"),
+    Country(name = "Monaco", isoCode = "MC", stdCode = "+377"),
+    Country(name = "Mongolia", isoCode = "MN", stdCode = "+976"),
+    Country(name = "Montenegro", isoCode = "ME", stdCode = "+382"),
+    Country(name = "Morocco", isoCode = "MA", stdCode = "+212"),
+    Country(name = "Mozambique", isoCode = "MZ", stdCode = "+258"),
+    Country(name = "Myanmar", isoCode ="MM", stdCode = "+95"),
+    Country(name = "Namibia", isoCode = "NA", stdCode = "+264"),
+    Country(name = "Nauru", isoCode = "NR", stdCode = "+674"),
+    Country(name = "Nepal", isoCode = "NP", stdCode = "+977"),
+    Country(name = "Netherlands", isoCode = "NL", stdCode = "+31"),
+    Country(name = "New Zealand", isoCode = "NZ", stdCode = "+64"),
+    Country(name = "Nicaragua", isoCode = "NI", stdCode = "+505"),
+    Country(name = "Niger", isoCode = "NE", stdCode = "+227"),
+    Country(name = "Nigeria", isoCode = "NG", stdCode = "+234"),
+    Country(name = "North Macedonia", isoCode = "MK", stdCode = "+389"),
+    Country(name = "Norway", isoCode = "NO", stdCode = "+47"),
+    Country(name = "Oman", isoCode = "OM", stdCode = "+968"),
+    Country(name = "Pakistan", isoCode = "PK", stdCode = "+92"),
+    Country(name = "Palau", isoCode = "PW", stdCode = "+680"),
+    Country(name = "Palestine", isoCode = "PS", stdCode = "+970"),
+    Country(name = "Panama", isoCode = "PA", stdCode = "+507"),
+    Country(name = "Papua New Guinea", isoCode = "PG", stdCode = "+675"),
+    Country(name = "Paraguay", isoCode = "PY", stdCode = "+595"),
+    Country(name = "Peru", isoCode = "PE", stdCode = "+51"),
+    Country(name = "Philippines", isoCode = "PH", stdCode = "+63"),
+    Country(name = "Poland", isoCode = "PL", stdCode = "+48"),
+    Country(name = "Portugal", isoCode = "PT", stdCode = "+351"),
+    Country(name = "Qatar", isoCode = "QA", stdCode = "+974"),
+    Country(name = "Romania", isoCode = "RO", stdCode = "+40"),
+    Country(name = "Russia", isoCode = "RU", stdCode = "+7"),
+    Country(name = "Rwanda", isoCode = "RW", stdCode = "+250"),
+    Country(name = "Saint Kitts and Nevis", isoCode = "KN", stdCode = "+1-869"),
+    Country(name = "Saint Lucia", isoCode = "LC", stdCode = "+1-758"),
+    Country(name = "Saint Vincent and the Grenadines", isoCode = "VC", stdCode = "+1-784"),
+    Country(name = "Samoa", isoCode = "WS", stdCode = "+685"),
+    Country(name = "San Marino", isoCode = "SM", stdCode = "+378"),
+    Country(name = "Sao Tome and Principe", isoCode = "ST", stdCode = "+239"),
+    Country(name = "Saudi Arabia", isoCode = "SA", stdCode = "+966"),
+    Country(name = "Senegal", isoCode = "SN", stdCode = "+221"),
+    Country(name = "Serbia", isoCode = "RS", stdCode = "+381"),
+    Country(name = "Seychelles", isoCode = "SC", stdCode = "+248"),
+    Country(name = "Sierra Leone", isoCode = "SL", stdCode = "+232"),
+    Country(name = "Singapore", isoCode = "SG", stdCode = "+65"),
+    Country(name = "Slovakia", isoCode = "SK", stdCode = "+421"),
+    Country(name = "Slovenia", isoCode = "SI", stdCode = "+386"),
+    Country(name = "Solomon Islands", isoCode = "SB", stdCode = "+677"),
+    Country(name = "Somalia", isoCode = "SO", stdCode = "+252"),
+    Country(name = "South Africa", isoCode = "ZA", stdCode = "+27"),
+    Country(name = "South Korea", isoCode = "KR", stdCode = "+82"),
+    Country(name = "South Sudan", isoCode = "SS", stdCode = "+211"),
+    Country(name = "Spain", isoCode = "ES", stdCode = "+34"),
+    Country(name = "Sri Lanka", isoCode = "LK", stdCode = "+94"),
+    Country(name = "Sudan", isoCode = "SD", stdCode = "+249"),
+    Country(name = "Suriname", isoCode = "SR", stdCode = "+597"),
+    Country(name = "Sweden", isoCode = "SE", stdCode = "+46"),
+    Country(name = "Switzerland", isoCode = "CH", stdCode = "+41"),
+    Country(name = "Syria", isoCode = "SY", stdCode = "+963"),
+    Country(name = "Taiwan", isoCode = "TW", stdCode = "+886"),
+    Country(name = "Tajikistan", isoCode = "TJ", stdCode = "+992"),
+    Country(name = "Tanzania", isoCode = "TZ", stdCode = "+255"),
+    Country(name = "Thailand", isoCode = "TH", stdCode = "+66"),
+    Country(name = "Timor-Leste", isoCode = "TL", stdCode = "+670"),
+    Country(name = "Togo", isoCode = "TG", stdCode = "+228"),
+    Country(name = "Tonga", isoCode = "TO", stdCode = "+676"),
+    Country(name = "Trinidad and Tobago", isoCode = "TT", stdCode = "+1-868"),
+    Country(name = "Tunisia", isoCode = "TN", stdCode = "+216"),
+    Country(name = "Turkey", isoCode = "TR", stdCode = "+90"),
+    Country(name = "Turkmenistan", isoCode = "TM", stdCode = "+993"),
+    Country(name = "Tuvalu", isoCode = "TV", stdCode = "+688"),
+    Country(name = "Uganda", isoCode = "UG", stdCode = "+256"),
+    Country(name = "Ukraine", isoCode = "UA", stdCode = "+380"),
+    Country(name = "United Arab Emirates", isoCode = "AE", stdCode = "+971"),
+    Country(name = "United Kingdom", isoCode = "GB", stdCode = "+44"),
+    Country(name = "United States", isoCode = "US", stdCode = "+1"),
+    Country(name = "Uruguay", isoCode = "UY", stdCode = "+598"),
+    Country(name = "Uzbekistan", isoCode = "UZ", stdCode = "+998"),
+    Country(name = "Vanuatu", isoCode = "VU", stdCode = "+678"),
+    Country(name = "Vatican City", isoCode = "VA", stdCode = "+39"),
+    Country(name = "Venezuela", isoCode = "VE", stdCode = "+58"),
+    Country(name = "Vietnam", isoCode = "VN", stdCode = "+84"),
+    Country(name = "Yemen", isoCode = "YE", stdCode = "+967"),
+    Country(name = "Zambia", isoCode = "ZM", stdCode = "+260"),
+    Country(name = "Zimbabwe", isoCode = "ZW", stdCode = "+263")
+)
+
+data class Country(
+    val name: String,
+    val isoCode: String,
+    val stdCode: String
+) {
+    // Generates the flag emoji using the ISO code
+    val flag: String
+        get() = isoCode
+            .uppercase() // Ensure ISO code is uppercase
+            .map { char -> 0x1F1E6 + (char.code - 'A'.code) } // Map to regional indicator symbols
+            .joinToString("") { Character.toChars(it).concatToString() } // Convert to emoji
+}
+
+
+@Composable
+fun CountryCodeSelector() {
+    var expanded by remember { mutableStateOf(false) }
+    var selectedCountry by remember { mutableStateOf(countries.first()) }
+
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        // Display the selected country (Flag + STD Code)
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable { expanded = true }
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(text = selectedCountry.flag, fontSize = 24.sp) // Flag emoji
+            Spacer(modifier = Modifier.width(8.dp))
+            Text(text = selectedCountry.stdCode, fontSize = 18.sp) // STD code
+        }
+
+        // Dropdown menu
+        DropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false }
+        ) {
+            countries.forEach { country ->
+                DropdownMenuItem(onClick = {
+                    selectedCountry = country
+                    expanded = false
+                }) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text(text = country.flag, fontSize = 24.sp) // Flag emoji
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(text = country.stdCode, fontSize = 18.sp) // STD code
+                    }
+                }
+            }
+        }
+    }
+}
+
+
