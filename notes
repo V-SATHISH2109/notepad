@@ -1,143 +1,67 @@
-[1/8, 10:47 PM] ChatGPT: 2. *Define the Shared UI Code*: We’ll implement a simple *Tab layout* that switches between the "Active", "Used", and "Expired" tabs, with custom background colors and text styling.
-
-Shared Code in `commonMain` (Jetpack Compose)
-
-Here’s an example of how to create a shared UI code using Jetpack Compose Multiplatform:
-
-1. `commonMain` Code:
-
-```kotlin
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.text.BasicText
-import androidx.compose.foundation.text.appendInlineContent
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material.MaterialTheme
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import kotlinx.coroutines.delay
+import androidx.compose.ui.unit.Density
 
-@Composable
-fun TabView() {
-    var selectedTabIndex by remember { mutableStateOf(0) }
-    val tabs = listOf("Active", "Used", "Expired")
-
-    Column(modifier = Modifier.fillMaxSize()) {
-        // Tab Row
-        TabRow(
-            selectedTabIndex = selectedTabIndex,
-            modifier = Modifier.fillMaxWidth(),
-            containerColor = Color.White // Default background color for tabs
-        ) {
-[1/8, 10:47 PM] ChatGPT: tabs.forEachIndexed { index, tab ->
-                Tab(
-                    selected = selectedTabIndex == index,
-                    onClick = { selectedTabIndex = index },
-                    text = {
-                        Text(
-                            text = tab,
-                            color = if (selectedTabIndex == index) Color.White else Color.Black,
-                            style = TextStyle(fontSize = 16.sp)
-                        )
-                    },
-                    modifier = Modifier
-                        .background(
-                            if (selectedTabIndex == index) Color(0xFFFFC0CB) // Pink background for selected tab
-                            else Color.White
-                        )
-                )
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            MaterialTheme {
+                JigsawCard()
             }
         }
+    }
+}
 
-        // Tab Content
-        when (selectedTabIndex) {
-            0 -> ActiveTable()
-            1 -> UsedTable()
-            2 -> ExpiredTable()
+@Composable
+fun JigsawCard() {
+    Box(
+        modifier = Modifier
+            .padding(16.dp)
+            .clip(JigsawShape())
+            .background(Color.LightGray)
+            .size(200.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        // Add your card content here
+    }
+}
+
+class JigsawShape : Shape {
+    override fun createOutline(
+        size: androidx.compose.ui.geometry.Size,
+        density: Density
+    ): androidx.compose.ui.graphics.Outline {
+        val path = Path().apply {
+            moveTo(0f, 0f)
+            lineTo(size.width, 0f)
+            lineTo(size.width, size.height)
+            lineTo(0f, size.height)
+            close()
+
+            // Create the jigsaw notches (adjust values as needed)
+            moveTo(size.width / 4, 0f)
+            arcTo(20f, 20f, 0f, false, true, size.width / 4 + 20f, 20f)
+            moveTo(size.width * 3 / 4, 0f)
+            arcTo(20f, 20f, 0f, false, false, size.width * 3 / 4 - 20f, 20f)
+
+            moveTo(size.width / 4, size.height)
+            arcTo(20f, 20f, 0f, false, false, size.width / 4 + 20f, size.height - 20f)
+            moveTo(size.width * 3 / 4, size.height)
+            arcTo(20f, 20f, 0f, false, true, size.width * 3 / 4 - 20f, size.height - 20f)
         }
+        return androidx.compose.ui.graphics.Outline.Generic(path)
     }
 }
-
-@Composable
-fun ActiveTable() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        Text(
-            text = "Active Table",
-            color = Color.Black,
-            style = TextStyle(fontSize = 20.sp, fontWeight = androidx.compose.ui.text.font.FontWeight.Bold)
-[1/8, 10:47 PM] ChatGPT: )
-        Spacer(modifier = Modifier.height(20.dp))
-
-        BasicText("Important Active Text", style = TextStyle(color = Color.Black, fontSize = 16.sp))
-    }
-}
-
-@Composable
-fun UsedTable() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        Text(
-            text = "Used Table",
-            color = Color.Black,
-            style = TextStyle(fontSize = 20.sp, fontWeight = androidx.compose.ui.text.font.FontWeight.Bold)
-        )
-        Spacer(modifier = Modifier.height(20.dp))
-
-        BasicText("Important Used Text", style = TextStyle(color = Color.Black, fontSize = 16.sp))
-    }
-}
-
-@Composable
-fun ExpiredTable() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        Text(
-            text = "Expired Table",
-            color = Color.Black,
-            style = TextStyle(fontSize = 20.sp, fontWeight = androidx.compose.ui.text.font.FontWeight.Bold)
-        )
-        Spacer(modifier = Modifier.height(20.dp))
-
-        BasicText("Important Expired Text", style = TextStyle(color = Color.White, fontSize = 16.sp))
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    TabView()
-}
-```
-
-2. Explanation:
-
-1. *Tab Row*:
-[1/8, 10:47 PM] ChatGPT: - `TabRow` displays the tabs. The background color of the selected tab is pink (`Color(0xFFFFC0CB)`), and for unselected tabs, it's white.
-   - `selectedTabIndex` is used to track which tab is currently selected.
-
-2. *Tab Content*:
-   - When the user selects a tab, the content changes based on the `selectedTabIndex`.
-   - We have three different tables for "Active", "Used", and "Expired". Each table is represented by a Composable function (`ActiveTable()`, `UsedTable()`, `ExpiredTable()`).
-   - The important text in the tables has the color defined as `Color.Black` for "Active" and "Used" tables, and `Color.White` for the "Expired" table.
-
-3. *Text Styling*:
-   - We use `TextStyle` to define the font size, weight, and color for the table names and the important text.
-
-4. *Platform-Independent Code*:
-   - This code will work on both Android and iOS because it is in the `commonMain` module. The *Jetpack Compose* API works across multiple platforms, including Android and iOS, in a shared manner.
-
-3. Adding Platform-Specific Code (Optional)
