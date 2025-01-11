@@ -1,88 +1,185 @@
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Path
-import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.Density
+class PointsViewModel : ViewModel() {
+    var input by mutableStateOf("0")
+        private set
+    var isValidInput by mutableStateOf(false)
+        private set
+    var errorMessage by mutableStateOf("")
+        private set
+    var dollarAmount by mutableStateOf(0)
+        private set
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            MaterialTheme {
-                JigsawCard()
+    fun onInputChange(newValue: String) {
+        if (newValue.all { it.isDigit() }) {
+            input = newValue
+            val number = newValue.toIntOrNull() ?: 0
+            when {
+                number == 0 -> {
+                    isValidInput = false
+                    errorMessage = ""
+                    dollarAmount = 0
+                }
+                number > 4200 -> {
+                    isValidInput = false
+                    errorMessage = "Please enter a value less than or equal to 4200"
+                    dollarAmount = 0
+                }
+                number % 100 != 0 -> {
+                    isValidInput = false
+                    errorMessage = "Please enter multiples of hundreds only"
+                    dollarAmount = 0
+                }
+                else -> {
+                    isValidInput = true
+                    errorMessage = ""
+                    dollarAmount = (number / 100) * 10
+                }
+            }
+        }
+    }
+
+
+@Composable
+fun App() {
+    MaterialTheme {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .imePadding() // Adds padding to avoid keyboard overlap
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp), // Base padding
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                // Main content
+                Column(
+                    modifier = Modifier
+                        .weight(1f) // Pushes the button to the bottom
+                        .fillMaxWidth()
+                        .padding(16.dp)
+                ) {
+                    Text("Enter points (multiples of 100, up to 4200):")
+
+                    TextField(
+                        value = pointsViewModel.input,
+                        onValueChange = { pointsViewModel.onInputChange(it) },
+                        modifier = Modifier.fillMaxWidth(),
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                        isError = pointsViewModel.errorMessage.isNotEmpty()
+                    )
+
+                    if (pointsViewModel.errorMessage.isNotEmpty()) {
+                        Text(
+                            text = pointsViewModel.errorMessage,
+                         //   color = MaterialTheme.colorScheme.error,
+                         //   style = MaterialTheme.typography.bodySmall
+                        )
+                    } else {
+                        Text(
+                            text = "Equivalent Dollar Amount: $${pointsViewModel.dollarAmount}",
+                            style = MaterialTheme.typography.bodyMedium
+                        )
+                    }
+                }
+
+                // Button aligned at the bottom
+                Button(
+                    onClick = { /* Handle button click */ },
+                    //  enabled = pointsViewModel.isValidInput,
+                    modifier = Modifier
+                        .align(Alignment.CenterHorizontally)
+                        .padding(bottom = 50.dp)
+                        .height(100.dp)
+                ) {
+                    Text("Submit")
+                }
+            }
+        }
+    }
+
+}
+}
+
+
+
+
+@Composable
+@Preview
+fun App() {
+    var input by remember { mutableStateOf("0") }
+    var isValidInput by remember { mutableStateOf(false) }
+    var errorMessage by remember { mutableStateOf("") }
+
+    MaterialTheme {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .imePadding() // Adds padding to avoid keyboard overlap
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp), // Base padding
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                // Main content
+                Column(
+                    modifier = Modifier
+                        .weight(1f) // Pushes the button to the bottom
+                        .fillMaxWidth()
+                        .padding(16.dp)
+                ) {
+                    Text("My content")
+                    Text("My content")
+                    Text("My content")
+
+                    TextField(
+                        value = input,
+                        onValueChange = { newValue ->
+                            // Allow only numeric input
+                            if (newValue.all { it.isDigit() }) {
+                                input = newValue
+                                val number = newValue.toIntOrNull() ?: 0
+                                isValidInput = number != 0 && number % 100 == 0
+                                errorMessage = if (isValidInput) {
+                                    ""
+                                } else if (number == 0) {
+                                    ""
+                                } else {
+                                    "Please enter multiples of hundreds only"
+                                }
+                            }
+                        },
+                        modifier = Modifier.fillMaxWidth(),
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                        isError = errorMessage.isNotEmpty()
+                    )
+
+                    if (errorMessage.isNotEmpty()) {
+                        Text(
+                            text = errorMessage,
+                          //  color = Colors.R,
+                         //   style = MaterialTheme.typography.bodySmall
+                        )
+                    }
+                }
+
+                // Button aligned at the bottom
+                Button(
+                    onClick = { /* Handle button click */ },
+                    enabled = isValidInput,
+                    modifier = Modifier
+                        .align(Alignment.CenterHorizontally)
+                        .padding(bottom = 50.dp)
+                        .height(100.dp)
+                ) {
+                    Text("BTN")
+                }
             }
         }
     }
 }
 
-@Composable
-fun JigsawCard() {
-    Box(
-        modifier = Modifier
-            .padding(16.dp)
-            .clip(JigsawShape())
-            .background(Color.LightGray)
-            .size(200.dp),
-        contentAlignment = Alignment.Center
-    ) {
-        // Add your card content here
-    }
-}
-
-class JigsawShape : Shape {
-    override fun createOutline(
-        size: androidx.compose.ui.geometry.Size,
-        density: Density
-    ): androidx.compose.ui.graphics.Outline {
-        val path = Path().apply {
-            moveTo(0f, 0f)
-            lineTo(size.width, 0f)
-            lineTo(size.width, size.height)
-            lineTo(0f, size.height)
-            close()
-
-            // Create the jigsaw notches (adjust values as needed)
-            moveTo(size.width / 4, 0f)
-            arcTo(20f, 20f, 0f, false, true, size.width / 4 + 20f, 20f)
-            moveTo(size.width * 3 / 4, 0f)
-            arcTo(20f, 20f, 0f, false, false, size.width * 3 / 4 - 20f, 20f)
-
-            moveTo(size.width / 4, size.height)
-            arcTo(20f, 20f, 0f, false, false, size.width / 4 + 20f, size.height - 20f)
-            moveTo(size.width * 3 / 4, size.height)
-            arcTo(20f, 20f, 0f, false, true, size.width * 3 / 4 - 20f, size.height - 20f)
-        }
-        return androidx.compose.ui.graphics.Outline.Generic(path)
-    }
-}
 
 
-
-
-
-
-@Composable
-private fun DrawDashLine() {
-    val pathEffect = PathEffect.dashPathEffect(floatArrayOf(20f, 10f), 0f)
-    Canvas(
-        Modifier.fillMaxWidth()
-    ) {
-        drawLine(
-            color = AppColor.brandColor.BLUE_DE_FRANCE,
-            strokeWidth = 5f,
-            start = Offset(20f, 0f),
-            end = Offset(size.width - 20, 0f),
-            pathEffect = pathEffect
-        )
-    }
-}
