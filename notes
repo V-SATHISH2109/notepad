@@ -1,185 +1,237 @@
-class PointsViewModel : ViewModel() {
-    var input by mutableStateOf("0")
-        private set
-    var isValidInput by mutableStateOf(false)
-        private set
-    var errorMessage by mutableStateOf("")
-        private set
-    var dollarAmount by mutableStateOf(0)
-        private set
+					packages
 
-    fun onInputChange(newValue: String) {
-        if (newValue.all { it.isDigit() }) {
-            input = newValue
-            val number = newValue.toIntOrNull() ?: 0
-            when {
-                number == 0 -> {
-                    isValidInput = false
-                    errorMessage = ""
-                    dollarAmount = 0
-                }
-                number > 4200 -> {
-                    isValidInput = false
-                    errorMessage = "Please enter a value less than or equal to 4200"
-                    dollarAmount = 0
-                }
-                number % 100 != 0 -> {
-                    isValidInput = false
-                    errorMessage = "Please enter multiples of hundreds only"
-                    dollarAmount = 0
-                }
-                else -> {
-                    isValidInput = true
-                    errorMessage = ""
-                    dollarAmount = (number / 100) * 10
-                }
-            }
-        }
+
+npx react-native@0.70 init ProjectName --version 0.70
+npm install -g react-native@latest
+npx react-native@latest init AwesomeProject
+npm start -- --port=8088
+npm start -- --reset-cache
+npx react-native doctor =========>show the problem
+
+
+ npm install -g npm@10.4.0 ----how to update the npm latest verison
+
+https://jsonplaceholder.typicode.com/ 			 (free j.son() api link)
+https://jsonplaceholder.typicode.com/posts?_limit=10
+
+"https://api-thirukkural.vercel.app/api?num=5000"   (thirukural api)
+
+npm outdated (to upodate tha package)
+
+C:\Users\Lenovo\AppData\Local\Packages\5319275A.WhatsAppDesktop_cv1g1gvanyjgm\LocalState\shared\transfers (whatsapp up storange place)
+
+
+			react-native and native-stack
+
+npm install @react-navigation/native @react-navigation/native-stack
+npm install react-native-screens react-native-safe-area-context
+npm install --save react-navigation
+
+
+		(Drawer navigation)
+
+npm install @react-navigation/drawer
+npm install react-native-gesture-handler react-native-reanimated
+plugins: ['react-native-reanimated/plugin'], (past in babel.config.js)
+import 'react-native-gesture-handler';    (past in index.js)
+
+
+			material-top-tabs
+
+npm install @react-navigation/material-top-tabs
+npm install react-native-pager-view
+(this cmd is material top tabs)
+
+npx react-native-asset (it is using the linking the font cmd)
+
+
+			async-storage
+
+npm install @react-native-async-storage/async-storage
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+(async storage)
+
+
+			font change
+
+npm install --save react-native-vector-icons
+(file name) android/app/build.gradle  (past the )
+apply from: file("../../node_modules/react-native-vector-icons/fonts.gradle")
+>cd android
+./gradlew clean
+./gradlew assembleRelease   (to create apk file)
+./gradlew bundleRelease    (to create aab)
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+
+https://fontawesome.com/v5/search?q=bt&o=r
+
+
+			google Font
+
+react-native.config.js
+
+module.exports = {
+  project: {
+    ios: {},
+    android: {},
+  },
+  assets: ['./src/assets/fonts/'],
+};
+ 
+npx react-native-asset    ------->linking the fonts
+
+
+			cheackbox
+
+
+
+npm install @react-native-community/checkbox
+   <CheckBox
+        value={isChecked}
+        onValueChange={handleCheckboxChange}      --->this is function in onvaluechange
+      />
+				firebase
+
+
+npm install firebase 
+
+				gradlwe clean
+cd android
+./gradlew clean
+cd android ./gradlew signingReport  (its is used to get the SHAR number form firebase)
+
+
+
+			Multi language
+
+
+npm install i18next react-i18next
+
+
+!!!----------------------------------------------------------------------!!
+
+			Map and location
+
+
+npm install react-native-maps @react-native-community/geolocation
+
+		>android>app>src>main>androidMani
+
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+			(google pay key)
+ <meta-data
+     android:name="com.google.android.geo.API_KEY"
+     android:value="AIzaSyDbXXKWbYKafIMeHt4XsvHLK93_VeHhDag"/>
+
+
+!!-----------------------------------------------------------------------!!
+
+
+
+ onPress={() => {
+                    Linking.openURL('https://www.google.com/');
+                  }}
+
+!!--------------------------------------------------------------------!!
+			
+				 Redux
+
+npm install @reduxjs/toolkit
+npm install react-redux
+
+
+					Date 
+npm i date-fns
+
+
+
+!!-----------------------------------------------------------------!!
+
+
+
+
+
+
+
+links
+
+1) https://youtu.be/g_efptBp0tY?si=BMPdFcuzJbOb-iP8      (Multi language)
+
+2) https://youtu.be/zEL-L2F0o7Q
+   https://youtu.be/2xXOn9paMWw              (FIRE BASE)
+   https://youtu.be/q1bxyyKh3Dc
+	
+
+
+
+npm install react-native-sqlite-storage
+
+
+-----------------------//if you want to turn on network then the validation will work--------------------------------
+https://aboutreact.com/example-of-sqlite-database-in-react-native/
+https://inloop.github.io/sqlite-viewer/
+https://www.youtube.com/watch?v=4zcFp8RluyA
+
+
+use this package ===>npm install @react-native-community/netinfo
+
+
+import NetInfo from '@react-native-community/netinfo';
+
+  const [isConnected, setIsConnected] = useState(true); // Initially assuming connected
+
+  useEffect(() => {
+    // Check network connectivity when component mounts
+    const unsubscribe = NetInfo.addEventListener(state => {
+      setIsConnected(state.isConnected);
+    });
+
+    // Cleanup function
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+  const handleLogin = () => {
+    if (!isConnected) {
+      Alert.alert('Please turn on mobile data or connect to a network');
+      return;
     }
 
+    // Proceed with login logic
+    // ...
+  };
 
-@Composable
-fun App() {
-    MaterialTheme {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .imePadding() // Adds padding to avoid keyboard overlap
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(16.dp), // Base padding
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                // Main content
-                Column(
-                    modifier = Modifier
-                        .weight(1f) // Pushes the button to the bottom
-                        .fillMaxWidth()
-                        .padding(16.dp)
-                ) {
-                    Text("Enter points (multiples of 100, up to 4200):")
+----------------------------------------------------------------------------------------------------------------
 
-                    TextField(
-                        value = pointsViewModel.input,
-                        onValueChange = { pointsViewModel.onInputChange(it) },
-                        modifier = Modifier.fillMaxWidth(),
-                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                        isError = pointsViewModel.errorMessage.isNotEmpty()
-                    )
 
-                    if (pointsViewModel.errorMessage.isNotEmpty()) {
-                        Text(
-                            text = pointsViewModel.errorMessage,
-                         //   color = MaterialTheme.colorScheme.error,
-                         //   style = MaterialTheme.typography.bodySmall
-                        )
-                    } else {
-                        Text(
-                            text = "Equivalent Dollar Amount: $${pointsViewModel.dollarAmount}",
-                            style = MaterialTheme.typography.bodyMedium
-                        )
-                    }
-                }
 
-                // Button aligned at the bottom
-                Button(
-                    onClick = { /* Handle button click */ },
-                    //  enabled = pointsViewModel.isValidInput,
-                    modifier = Modifier
-                        .align(Alignment.CenterHorizontally)
-                        .padding(bottom = 50.dp)
-                        .height(100.dp)
-                ) {
-                    Text("Submit")
-                }
-            }
-        }
-    }
+10) https://youtube.com/shorts/MDaxWffMjrQ?feature=share   (vs extantion bracket)
 
-}
-}
+
+
+npx react-native start --port 8082
+npx react-native run-android --port 8082
+
+
+npm i @fortawesome/free-solid-svg-icons
+
+npm i @fortawesome/react-native-fontawesome
+
+const discountedPrice = originalPrice - (originalPrice * discountPercentage / 100);
 
 
 
 
-@Composable
-@Preview
-fun App() {
-    var input by remember { mutableStateOf("0") }
-    var isValidInput by remember { mutableStateOf(false) }
-    var errorMessage by remember { mutableStateOf("") }
 
-    MaterialTheme {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .imePadding() // Adds padding to avoid keyboard overlap
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(16.dp), // Base padding
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                // Main content
-                Column(
-                    modifier = Modifier
-                        .weight(1f) // Pushes the button to the bottom
-                        .fillMaxWidth()
-                        .padding(16.dp)
-                ) {
-                    Text("My content")
-                    Text("My content")
-                    Text("My content")
 
-                    TextField(
-                        value = input,
-                        onValueChange = { newValue ->
-                            // Allow only numeric input
-                            if (newValue.all { it.isDigit() }) {
-                                input = newValue
-                                val number = newValue.toIntOrNull() ?: 0
-                                isValidInput = number != 0 && number % 100 == 0
-                                errorMessage = if (isValidInput) {
-                                    ""
-                                } else if (number == 0) {
-                                    ""
-                                } else {
-                                    "Please enter multiples of hundreds only"
-                                }
-                            }
-                        },
-                        modifier = Modifier.fillMaxWidth(),
-                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                        isError = errorMessage.isNotEmpty()
-                    )
 
-                    if (errorMessage.isNotEmpty()) {
-                        Text(
-                            text = errorMessage,
-                          //  color = Colors.R,
-                         //   style = MaterialTheme.typography.bodySmall
-                        )
-                    }
-                }
 
-                // Button aligned at the bottom
-                Button(
-                    onClick = { /* Handle button click */ },
-                    enabled = isValidInput,
-                    modifier = Modifier
-                        .align(Alignment.CenterHorizontally)
-                        .padding(bottom = 50.dp)
-                        .height(100.dp)
-                ) {
-                    Text("BTN")
-                }
-            }
-        }
-    }
-}
+
+
+
 
 
 
